@@ -1,3 +1,4 @@
-export const Admin () => {
-    return <>Admin sidan...</>
-}
+export const Admin = () => {
+    return <>Admin</>;
+  };
+  

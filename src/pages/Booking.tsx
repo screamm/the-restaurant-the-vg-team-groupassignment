@@ -1,3 +1,4 @@
 export const Booking = () => {
-    return <>Bokningssida!</>;
-}
+    return <>Booking</>;
+  };
+  

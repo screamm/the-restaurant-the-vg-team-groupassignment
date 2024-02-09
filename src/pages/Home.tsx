@@ -1,3 +1,4 @@
 export const Home = () => {
-    return <>Startsida!</>
-}
+    return <>Home</>;
+  };
+  
