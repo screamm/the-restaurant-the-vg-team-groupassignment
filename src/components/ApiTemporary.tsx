@@ -1,30 +1,64 @@
-// import { useEffect, useState } from "react";
-// import "./App.css";
-// import { IRestaurant } from "./models/IRestaurant";
-// import axios from 'axios';
 
-// function App() {
+import { useEffect, useState } from "react";
+import { IRestaurant } from "../models/IRestaurant";
+import axios from 'axios';
+import { Restaurant } from "../models/Restaurant";
 
-//   const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
+function ApiRendering() {
+
+  const [restaurants, setRestaurants] = useState<IRestaurant[]>([
+    new Restaurant("My Restaurant", {
+      street: "123 Main St",
+      zip: "12345",
+      city: "Cityville"
+    })
+  ]);
+
+
+  const newRestaurantData: IRestaurant = {
+    name: "Happy Dumpling",
+    address: {
+      street: "Malmögatan 8",
+      zip: "54321",
+      city: "Malmö"
+    }
+  };
+
+  useEffect(() => {
     
-//   useEffect(() => {
-//     axios
-//       .get("https://school-restaurant-api.azurewebsites.net/" )
-//       .then((response) => {
-//         console.log(response.data);
-//         setRestaurants(response.data || []);
-//       })
-//       .catch((error) => {
-//         console.error('Error fetching restaurants:', error);
-//       });
-//   }, []);
+    setRestaurants(prevRestaurants => [...prevRestaurants, newRestaurantData]);
 
-//   return (
-//     <div>
-//       <h1>Restaurant Page</h1>
+    
+    axios
+      .post("https://school-restaurant-api.azurewebsites.net/restaurant/create", newRestaurantData)
+      .then((response) => {
+        console.log('New restaurant created successfully:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error creating restaurant:', error);
+      });
+
+      axios
+      .get("https://school-restaurant-api.azurewebsites.net/restaurant/65c6276ee125e85f5e15b79f")
+      .then((response) => {
+        console.log('Get Restaurant', response.data);
+        setRestaurants(response.data || []);
+      })
+      .catch((error) => {
+        console.error('Error fetching restaurants:', error);
+      });
+  }, []);
+
+ 
+  
+
+  return (
+    <div>
+      <h1>Restaurant Page</h1>
+     
       
-//     </div>
-//   );
-// }
+    </div>
+  );
+}
 
-// export default App;
+export default ApiRendering;
