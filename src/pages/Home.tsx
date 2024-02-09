@@ -1,4 +1,8 @@
+import ApiRendering from "../components/ApiTemporary";
+
 export const Home = () => {
-    return <>Home</>;
+    return <>
+    <ApiRendering></ApiRendering>
+    </>;
   };
   

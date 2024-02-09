@@ -1,11 +1,10 @@
 
 import { useEffect, useState } from "react";
-import "./App.css";
 import { IRestaurant } from "../models/IRestaurant";
 import axios from 'axios';
 import { Restaurant } from "../models/Restaurant";
 
-function App() {
+function ApiRendering() {
 
   const [restaurants, setRestaurants] = useState<IRestaurant[]>([
     new Restaurant("My Restaurant", {
@@ -56,9 +55,10 @@ function App() {
   return (
     <div>
       <h1>Restaurant Page</h1>
+     
       
     </div>
   );
 }
 
-export default App;
+export default ApiRendering;
