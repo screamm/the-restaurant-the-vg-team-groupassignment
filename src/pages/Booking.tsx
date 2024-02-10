@@ -1,13 +1,8 @@
-import { Loader } from "../components/Loader";
+import { BookingForm } from "../components/BookingForm";
 
 export const Booking = () => {
     return <>
-    <div>
-    
-    <p>Booking</p>
-    
-    <Loader />
-    
-    </div>
-    </>
+    Booking
+    <BookingForm></BookingForm>
+    </>;
   };
