@@ -16,7 +16,7 @@ export const BookingForm = () => {
         const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
             const { name, value } = e.target;
             if (name.startsWith("customer.")) {
-                // If it's a nested property of customer object
+                
                 setAddBooking(prevState => ({
                     ...prevState,
                     customer: {
@@ -25,10 +25,10 @@ export const BookingForm = () => {
                     }
                 }));
             } else {
-                // If it's a top-level property
+                const newValue = name === 'numberOfGuests' ? parseInt(value) : value;
                 setAddBooking(prevState => ({
                     ...prevState,
-                    [name]: value
+                    [name]: newValue
                 }));
             }
         };
