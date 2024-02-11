@@ -7,10 +7,10 @@ import { Restaurant } from "../models/Restaurant";
 function ApiRendering() {
 
   const [restaurants, setRestaurants] = useState<IRestaurant[]>([
-    new Restaurant("My Restaurant", {
-      street: "123 Main St",
-      zip: "12345",
-      city: "Cityville"
+    new Restaurant("", {
+      street: "",
+      zip: "",
+      city: ""
     })
   ]);
 

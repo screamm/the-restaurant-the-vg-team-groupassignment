@@ -1,4 +1,5 @@
-import { ChangeEvent, SyntheticEvent, useState } from "react"
+import axios from "axios";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react"
 
 export const BookingForm = () => {
 
@@ -32,11 +33,20 @@ export const BookingForm = () => {
                 }));
             }
         };
-    const onSubmit = (e:  SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
-        e.preventDefault()
-        console.log(addBooking)  
-    }
 
+    
+    const onSubmit = (e:  SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
+    e.preventDefault()
+    axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", addBooking)
+              .then((response) => {
+                console.log('New booking created successfully:', response.data);
+              })
+              .catch((error) => {
+                console.error('Error creating booking:', error);
+              });
+        
+                console.log(addBooking)
+    }
     return(
         <>
         <div>Make your reservation</div>
@@ -120,10 +130,11 @@ export const BookingForm = () => {
             value={addBooking.customer.phone}
             onChange={handleInputChange} />
         </div>
-        <input 
+        <button
         className="btn btn-block" 
         type="submit" 
-        value="Save Task" />
+        value="Save Task"
+        >Book a table</button>
         </form>
         </>
     )
