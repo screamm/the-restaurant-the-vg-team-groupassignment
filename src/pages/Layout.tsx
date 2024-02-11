@@ -12,7 +12,7 @@ export const Layout = () => {
         <Outlet />
       </main>
 
-      <footer>Fooooter</footer>
+      <footer>Fooooter in Laoyout.tsx</footer>
     </>
   );
 };

@@ -54,7 +54,7 @@ function ApiRendering() {
 
   return (
     <div>
-      <h1>Restaurant Page</h1>
+      <h1>{newRestaurantData.name}</h1>
      
       
     </div>
