@@ -1,8 +1,10 @@
 import axios from "axios";
 import { ChangeEvent, SyntheticEvent, useState } from "react"
+import { useParams } from "react-router-dom";
 
 export const BookingForm = () => {
 
+    const  {id}  = useParams<{ id?: string }>() || ''
     const [addBooking, setAddBooking] = useState({restaurantId: '',
         date: '',
         time: '',
@@ -46,6 +48,19 @@ export const BookingForm = () => {
               });
         
                 console.log(addBooking)
+
+               
+                if (id) { 
+                axios
+                .get(`https://school-restaurant-api.azurewebsites.net/booking/${id}`)
+                .then((response) => {
+                  console.log('Get Booking', response.data);
+                //   setAddBooking(response.data || []);
+                })
+                .catch((error) => {
+                  console.error('Error fetching booking:', error);
+                });
+            }
     }
     return(
         <>
