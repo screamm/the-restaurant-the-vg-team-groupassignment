@@ -1,4 +1,4 @@
-export interface AdminBooking {
+export interface ChangeBooking {
     id: string,
     restaurantId: string,
     date: string,
