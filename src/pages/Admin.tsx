@@ -1,4 +1,4 @@
-import { AdminHandleBooking } from "../components/AdminHandleBooking";
+import { AdminHandleBooking } from "../components/AdminHandleBookings";
 
 export const Admin = () => {
     return <>
