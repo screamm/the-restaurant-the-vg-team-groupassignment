@@ -1,9 +1,9 @@
 import axios from "axios";
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react"
+import { ChangeEvent, SyntheticEvent, useState } from "react"
 
 export const BookingForm = () => {
 
-    const [addBooking, setAddBooking] = useState({restaurantID: '',
+    const [addBooking, setAddBooking] = useState({restaurantId: '',
         date: '',
         time: '',
         numberOfGuests: 0,
@@ -55,9 +55,9 @@ export const BookingForm = () => {
             <label>RestaurantID: 65c6276ee125e85f5e15b79f</label>
             <input 
             type="text" 
-            placeholder="Add ID"
-            name="restaurantID"
-            value={addBooking.restaurantID}
+            placeholder="Add Id"
+            name="restaurantId"
+            value={addBooking.restaurantId}
             onChange={handleInputChange} />
         </div>
         <div>
