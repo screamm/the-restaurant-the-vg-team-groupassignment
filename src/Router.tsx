@@ -3,9 +3,9 @@ import { Contact } from "./pages/Contact";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Layout } from "./pages/Layout";
-import { Bookings } from "./pages/BookingsPage";
+import { BookingsPage } from "./pages/BookingsPage";
 import { Admin } from "./pages/Admin";
-import { Booking } from "./pages/Booking";
+import { BookingRender } from "./pages/BookingRender";
 
 
 export const router = createBrowserRouter([
@@ -25,21 +25,17 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/BookingsPage",
-        element: <Bookings />,
+        path: "/booking",
+        element: <BookingsPage />,
       },
       {
         path: "/Admin",
         element: <Admin />,
       },
-      {
-        path: "/Booking/:id"
-        
-      }
 
       {
         path: "/Booking/:id",
-        element: <Booking />
+        element: <BookingRender />
       }
 
     ],

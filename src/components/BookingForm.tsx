@@ -1,10 +1,11 @@
 import axios from "axios";
+import {Link} from 'react-router-dom'
 import { ChangeEvent, SyntheticEvent, useState } from "react"
 import { useParams } from "react-router-dom";
 
 export const BookingForm = () => {
+    const { id } = useParams();
 
-    const  {id}  = useParams<{ id?: string }>() || ''
     const [addBooking, setAddBooking] = useState({restaurantId: '',
         date: '',
         time: '',
@@ -50,17 +51,7 @@ export const BookingForm = () => {
                 console.log(addBooking)
 
                
-                if (id) { 
-                axios
-                .get(`https://school-restaurant-api.azurewebsites.net/booking/${id}`)
-                .then((response) => {
-                  console.log('Get Booking', response.data);
-                //   setAddBooking(response.data || []);
-                })
-                .catch((error) => {
-                  console.error('Error fetching booking:', error);
-                });
-            }
+                
     }
     return(
         <>
@@ -147,11 +138,13 @@ export const BookingForm = () => {
             value={addBooking.customer.phone}
             onChange={handleInputChange} />
         </div>
-        <button
-        className="btn btn-block" 
+        
+        
+        <button className="btn btn-block" 
         type="submit" 
-        value="Save Task"
-        >Book a table</button>
+        value="Save Task">Book a table</button>
+        <br />
+        <Link to={`/booking/${id}`}>Se din bokning här</Link>
         </form>
         </>
     )

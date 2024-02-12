@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export const Booking = () => {
+export const BookingRender = () => {
     const { id } = useParams();
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export const Booking = () => {
     return (
         <>
             <div>
-                Booking {id}
+                Ditt bokningsId {id}
             </div>
         </>
     );};
