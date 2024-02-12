@@ -14,9 +14,6 @@ export const BookingForm = () => {
             phone: ''
         }})
     
-
-
-
         const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
             const { name, value } = e.target;
             if (name.startsWith("customer.")) {
