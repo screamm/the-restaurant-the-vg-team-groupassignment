@@ -3,8 +3,9 @@ import { Contact } from "./pages/Contact";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Layout } from "./pages/Layout";
-import { Booking } from "./pages/Booking";
+import { Bookings } from "./pages/BookingsPage";
 import { Admin } from "./pages/Admin";
+import { Booking } from "./pages/Booking";
 
 
 export const router = createBrowserRouter([
@@ -24,13 +25,18 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/Booking",
-        element: <Booking />,
+        path: "/BookingsPage",
+        element: <Bookings />,
       },
       {
         path: "/Admin",
         element: <Admin />,
       },
+
+      {
+        path: "/Booking/:id",
+        element: <Booking />
+      }
 
     ],
   },
