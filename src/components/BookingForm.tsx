@@ -52,13 +52,14 @@ export const BookingForm = () => {
         <div>Make your reservation</div>
         <form action="" onSubmit={onSubmit}>
         <div>
-            <label>RestaurantID: 65c6276ee125e85f5e15b79f</label>
-            <input 
-            type="text" 
-            placeholder="Add Id"
+            <label>Choose restaurant </label>
+            <select
             name="restaurantId"
             value={addBooking.restaurantId}
-            onChange={handleInputChange} />
+            onChange={handleInputChange}>
+            <option value="0">None</option>
+            <option value="65c6276ee125e85f5e15b79f">Happy Dumpling</option>
+            </select>
         </div>
         <div>
             <label>Date</label>
