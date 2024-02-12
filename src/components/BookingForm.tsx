@@ -76,6 +76,7 @@ export const BookingForm = () => {
             name="time"
             value={addBooking.time}
             onChange={handleInputChange}>
+                <option value="0">0</option>
                 <option value="18.00">18:00</option>
                 <option value="21.00">21:00</option>
             </select>
