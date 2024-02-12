@@ -1,13 +1,8 @@
-import { EditBookingForm } from "../components/EditBooking";
+import { AdminHandleBooking } from "../components/AdminHandleBooking";
 
 export const Admin = () => {
-    return <>Admin
-    
-    <div>
-
-      <EditBookingForm bookingId="" />
-    </div>
-    
-    
+    return <>
+    <AdminHandleBooking />
     </>;
   };
+  

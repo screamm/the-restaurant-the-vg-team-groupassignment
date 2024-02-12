@@ -1,5 +1,5 @@
 export class CustomerBooking {
-    constructor(public restaurantID: string,
+    constructor(public restaurantId: string,
     public date: string,
     public time: string,
     public numberOfGuests: number,
