@@ -1,6 +1,6 @@
 export interface AdminBooking {
     id: string,
-    restaurantID: string,
+    restaurantId: string,
     date: string,
     time: string,
     numberOfGuests: number,
