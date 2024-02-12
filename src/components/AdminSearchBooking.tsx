@@ -1,15 +1,19 @@
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { AdminBooking } from "../models/IAdminBooking";
 
-export const AdminHandleBooking = () => {
+export const AdminSearchBooking = () => {
     const [bookings, setBookings] = useState<AdminBooking[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
+
+    useEffect(() => {
+        fetchBookings();
+    }, []);
 
     const fetchBookings = async () => {
         try {
             const response = await axios.get<AdminBooking[]>(
-                "https://school-restaurant-api.azurewebsite.net/booking/update/:id"
+                `https://school-restaurant-api.azurewebsite.net/booking/update/${bookingId}`
             );
             setBookings(response.data);
         } catch (error) {
@@ -23,10 +27,9 @@ export const AdminHandleBooking = () => {
    
     return (
         <div>
-            <h1>Admin bokningshantering</h1>
             <input
                 type="text"
-                placeholder="Sök efter namn..."
+                placeholder="Sök efter namn eller bokningsID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -37,6 +40,8 @@ export const AdminHandleBooking = () => {
                     .map((booking) => (
                         <li key={booking.id}>
                             {booking.date} {booking.time} - {booking.numberOfGuests} gäster
+                            <button onClick={handleChange}>Ändra bokning</button>
+                            <button onClick={deleteBooking}>Radera bokning</button>
                         </li>
                     ))}
             </ul>
