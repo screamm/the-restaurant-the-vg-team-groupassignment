@@ -31,6 +31,10 @@ export const router = createBrowserRouter([
         path: "/Admin",
         element: <Admin />,
       },
+      {
+        path: "/Booking/:id"
+        
+      }
 
     ],
   },
