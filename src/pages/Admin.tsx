@@ -1,7 +1,7 @@
-import { AdminHandleBookings } from "../components/AdminHandleBookings";
+import { AdminHandleBooking } from "../components/AdminHandleBookings";
 
 export const Admin = () => {
     return <>
-    <AdminHandleBookings />
+    <AdminHandleBooking />
     </>;
   };

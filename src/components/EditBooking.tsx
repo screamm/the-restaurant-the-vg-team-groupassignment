@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
+import { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import axios from "axios";
 
 interface Booking {
@@ -10,7 +10,8 @@ interface Booking {
   customer: {
     name: string;
     lastname: string;
-
+    email: string;
+    phone: string;
   };
 }
 
