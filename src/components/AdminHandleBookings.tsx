@@ -10,15 +10,12 @@ export const AdminHandleBookings = () => {
     return (
         <>
         <h1>Admin Bokningshantering</h1>
-        <AllBookings restaurantId={restaurantId} />
+        <AllBookings />
 
-        <AdminSearchBooking restaurantId={restaurantId} />
+        <AdminSearchBooking />
 
-        <EditBooking restaurantId={restaurantId}
-        />
-
+        <EditBooking bookingId={restaurantId} />
 
         </>
     )
 }
-

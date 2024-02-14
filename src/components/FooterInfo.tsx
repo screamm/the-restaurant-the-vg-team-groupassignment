@@ -11,17 +11,7 @@ export const Footer = () => {
         <p>Email: info@happydumpling.com</p>
       </div>
 
-      {/* <div className="footer-social">
-        <a href="https://www.facebook.com/restaurant" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-facebook"></i>
-        </a>
-        <a href="https://www.instagram.com/restaurant" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.twitter.com/restaurant" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-twitter"></i>
-        </a>
-      </div> */}
+
 
 
     </footer>

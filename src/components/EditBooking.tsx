@@ -10,8 +10,7 @@ interface Booking {
   customer: {
     name: string;
     lastname: string;
-    email: string;
-    phone: string;
+
   };
 }
 
