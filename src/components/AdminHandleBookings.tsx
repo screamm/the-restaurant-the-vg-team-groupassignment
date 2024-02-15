@@ -1,5 +1,5 @@
 import { AllBookings } from "./AdminAllBookings";
-import { AdminSearchBooking } from "./AdminSearchBooking";
+
 
 export const AdminHandleBooking = () => {
 
@@ -10,4 +10,3 @@ export const AdminHandleBooking = () => {
         </>
     )
 }
-

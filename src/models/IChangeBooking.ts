@@ -1,4 +1,4 @@
-export interface ChangeBooking {
+export interface IBookingsRestaurantChangeBooking {
     id: string,
     restaurantId: string,
     date: string,

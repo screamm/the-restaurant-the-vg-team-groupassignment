@@ -53,14 +53,16 @@ export const AllBookings = () => {
         </div>
       ))}
       <h2>Alla bokningar:</h2>
-      {bookings.map((booking) => (
-        <div key={booking.id}>
-          Namn: {booking.customerName} {booking.customerLastname} 
-          Datum: {booking.date} 
-          Tid: {booking.time} 
-          Antal gäster: {booking.numberOfGuests}
-        </div>
-      ))}
+      <ul>
+        {bookings.map((booking: IBookingsRestaurant) => (
+          <div key={booking.id}>
+            Namn: {booking.customerName} {booking.customerLastname} 
+            Datum: {booking.date} 
+            Tid: {booking.time} 
+            Antal gäster: {booking.numberOfGuests}
+          </div>
+        ))}
+      </ul>
   </div>
 );
 };
