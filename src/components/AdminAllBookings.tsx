@@ -30,7 +30,7 @@ export const AllBookings = () => {
       })
     );
     setBookings(bookingsWithNames);
-    setFilteredBookings(bookingsWithNames);
+    setFilteredBookings([]);
   };
 
   const handleSearch = (searchTerm: string) => {
