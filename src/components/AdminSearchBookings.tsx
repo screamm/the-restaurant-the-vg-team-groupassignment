@@ -10,6 +10,7 @@ export const AdminSearchBooking = ({ handleSearch }: { handleSearch: (term: stri
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleSearch(searchTerm);
+    setSearchTerm('');
   };
 
   return (
