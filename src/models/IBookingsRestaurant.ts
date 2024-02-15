@@ -4,5 +4,7 @@ export interface IBookingsRestaurant {
     date: string,
     time: string,
     numberOfGuests: number,
-    customerId: string    
+    customerId: string,    
+    customerName: string,
+    customerLastname: string
 }
