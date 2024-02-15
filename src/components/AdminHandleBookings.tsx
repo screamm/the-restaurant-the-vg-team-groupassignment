@@ -4,6 +4,7 @@ import { AdminSearchBooking } from "./AdminSearchBookings";
 import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
 import { ICustomer } from "../models/ICustomer";
 import { AdminChangeBooking } from "./AdminChangeBookings";
+import { AdminDeleteBooking } from "./AdminDeleteBookings";
 
 export const AdminHandleBookings = () => {
   const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
@@ -60,6 +61,7 @@ export const AdminHandleBookings = () => {
               Antal gäster: {booking.numberOfGuests} <br/>
             </p>
             <AdminChangeBooking booking={booking} />
+            <AdminDeleteBooking bookingId={booking._id} />
           </li>
         );
         })}

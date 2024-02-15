@@ -2,9 +2,9 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
 import { useState } from 'react';
-import { ChangeBooking } from '../models/IChangeBooking';
+import { IBookingsRestaurantChangeBooking } from '../models/IChangeBooking';
 
-export const AdminChangeBooking = ({ booking }: { booking: ChangeBooking }) => {
+export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantChangeBooking }) => {
     const [newDate, setNewDate] = useState(booking.date);
     const [newTime, setNewTime] = useState(booking.time);
     const [newNumberOfGuests, setNewNumberOfGuests] = useState(booking.numberOfGuests);
@@ -16,7 +16,8 @@ export const AdminChangeBooking = ({ booking }: { booking: ChangeBooking }) => {
                 {
                     date: newDate,
                     time: newTime,
-                    numberOfGuests: newNumberOfGuests
+                    numberOfGuests: newNumberOfGuests,
+                    id: booking._id
                 }
             );
             console.log('Bokningen uppdaterades:', response.data);
