@@ -187,11 +187,11 @@ export const BookingForm = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <button className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type="submit" value="Save Task">
+                <button className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4" type="submit" value="Save Task">
                     Book a table
                 </button>
                 <br />
-                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Se din bokning här</Link>
+                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Se din bokning här</Link>
             </form>
         </div>
     );
