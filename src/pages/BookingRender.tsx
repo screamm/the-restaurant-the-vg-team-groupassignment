@@ -6,7 +6,7 @@ export const BookingRender = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        if (id) {
+        if (_id) {
             axios
                 .get(`https://school-restaurant-api.azurewebsites.net/booking/${id}`)
                 .then((response) => {
@@ -23,5 +23,14 @@ export const BookingRender = () => {
             <div>
                 Ditt bokningsId {id}
             </div>
+            <div>
+
+                <input type="text" placeholder="Skriv in ditt bokningsId" />          
+
+                <button type="submit" onClick={BookingRender}>Hämta bokning</button>
+               
+            </div>
         </>
     );};
+
+    
