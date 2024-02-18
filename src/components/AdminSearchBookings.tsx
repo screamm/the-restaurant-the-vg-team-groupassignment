@@ -21,7 +21,7 @@ export const AdminSearchBooking = ({ handleSearch }: { handleSearch: (term: stri
         onChange={handleChange}
         placeholder="Skriv in namn för att söka..."
       />
-      <button type="submit">Sök</button>
+      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Sök</button>
     </form>
   );
 };

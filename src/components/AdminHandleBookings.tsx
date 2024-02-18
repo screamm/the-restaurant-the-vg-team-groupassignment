@@ -5,10 +5,14 @@ import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
 import { ICustomer } from "../models/ICustomer";
 import { AdminChangeBooking } from "./AdminChangeBookings";
 import { AdminDeleteBooking } from "./AdminDeleteBookings";
+import { ChangeEvent } from "react";
 
 export const AdminHandleBookings = () => {
   const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<IBookingsRestaurant[]>([]);
+  const [searchDate, setSearchDate] = useState('');
+  const [searchItem, setSearchItem] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState<IBookingsRestaurant[]>([]);
 
   useEffect(() => {
     getAllBookings();
@@ -35,49 +39,44 @@ export const AdminHandleBookings = () => {
     setFilteredBookings([]);
   };
 
-  const handleSearch = (searchTerm: string) => {
-    const filtered = bookings.filter((booking) =>
-      booking.customerName.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm);
+
+    const filteredItems = bookings.filter((user) =>
+      user.date.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredBookings(filtered);
+
+    setFilteredUsers(filteredItems);
+    console.log('handlechange', searchTerm);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log('sök date');
+    handleInputChange;
   };
 
   return (
     <div>
-      <AdminSearchBooking handleSearch={handleSearch} />
-      <h2>Sökresultat:</h2>
-      {filteredBookings.length === 0 && (
-        <p>Finns ingen bokning med det angivna namnet!</p>
-      )}
-      <ul>
-        {filteredBookings.map((booking) => {
-          return (
-          <li key={booking._id}>
-            <p>
-              BokningsID: {booking._id} <br/>
-              Namn: {booking.customerName} {booking.customerLastname} <br/>
-              Datum: {booking.date} <br/>
-              Tid: {booking.time} <br/>
-              Antal gäster: {booking.numberOfGuests} <br/>
-            </p>
-            <AdminChangeBooking booking={booking} />
-            <AdminDeleteBooking bookingId={booking._id} />
-          </li>
-        );
-        })}
-      </ul>
-      
-      <h2>Alla bokningar:</h2>
-      <ul>
-      {bookings.map((booking) => (
-        <li key={booking._id}>
-          Namn: {booking.customerName} {booking.customerLastname} <br/>
-          Datum: {booking.date} <br/>
-          Tid: {booking.time} <br/>
-          Antal gäster: {booking.numberOfGuests} <br/>
+      <input
+        type="date"
+        name="date"
+        value={searchDate}
+        onChange={handleInputChange}
+      />
+      <button
+        onClick={handleClick}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4"
+      >
+        Sök på datum
+      </button>
+
+      {filteredUsers.map((booking) => (
+        <li key={booking.name}>
+          {booking.date}, {booking.customerName}
         </li>
-        ))}
-      </ul>
-  </div>
-);
+      ))}
+    </div>
+  );
 };

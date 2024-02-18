@@ -60,15 +60,60 @@ export const BookingForm = () => {
 
     const onSubmit = (e: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
         e.preventDefault();
-        axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", addBooking)
-            .then((response) => {
-                console.log('New booking created successfully:', response.data);
-            })
-            .catch((error) => {
-                console.error('Error creating booking:', error);
-            });
-    };
+    //     const bookingsForSelectedDate = restaurants.filter(booking => booking.date === addBooking.date)
+    //     const bookingsForSelectedTime = restaurants.filter(booking => booking.time === addBooking.time);
+    // if (bookingsForSelectedDate.length > 2 && bookingsForSelectedTime.length > 2 ) {
+    //     axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", addBooking)
+    //         .then((response) => {
+    //             console.log('New booking created successfully:', response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error creating booking:', error);
+    //         });
+    //     }else console.log('fully booked')
+    // };
+    if (!addBooking.date || !addBooking.time) {
+        console.log("Please select date and time.");
+        return;
+    }
 
+    // console.log(addBooking.date, addBooking.time)
+    // // Count the number of bookings for the selected date and time
+    // const bookingsForSelectedDateAndTime = restaurants.filter(booking => booking.date === addBooking.date && booking.time === addBooking.time);
+    
+    // // Check if the total number of bookings for the selected date and time exceeds the maximum capacity
+    // if (bookingsForSelectedDateAndTime.length >= 2) {
+    //     console.log("Fully booked for the selected date and time.");
+    //     return;
+    // }
+    
+    // If there is availability, proceed to create the booking
+    axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", addBooking)
+        .then((response) => {
+            console.log('New booking created successfully:', response.data);
+            // Update the restaurants state to include the newly created booking
+            setRestaurants(prevRestaurants => {
+                const updatedRestaurants = [...prevRestaurants, response.data];
+                
+                console.log("Updated restaurants:", updatedRestaurants);
+                
+                // Count the number of bookings for the selected date and time
+                const bookingsForSelectedDateAndTime = updatedRestaurants.filter(booking => booking.date === addBooking.date && booking.time === addBooking.time);
+                
+                console.log("Bookings for selected date and time:", bookingsForSelectedDateAndTime);
+                
+                // Check if the total number of bookings for the selected date and time exceeds the maximum capacity
+                if (bookingsForSelectedDateAndTime.length >= 2) {
+                    console.log("Fully booked for the selected date and time.");
+                }
+                
+                return updatedRestaurants;
+            });
+        })
+        .catch((error) => {
+            console.error('Error creating booking:', error);
+        });
+    }
     return (
         <div className="m-4 border-8 border-pink-600">
             <h2>Make your reservation</h2>
@@ -165,11 +210,11 @@ export const BookingForm = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <button className="btn btn-block" type="submit" value="Save Task">
+                <button className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 " type="submit" value="Save Task">
                     Book a table
                 </button>
-                <br />
-                <Link to={`/booking/${id}`}>Se din bokning här</Link>
+                <br /> 
+                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Se din bokning här</Link>
             </form>
         </div>
     );
