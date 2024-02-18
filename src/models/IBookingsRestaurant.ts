@@ -1,6 +1,6 @@
 export interface IBookingsRestaurant {
     id: string,
-    restaurantID: string,
+    restaurantId: string,
     date: string,
     time: string,
     numberOfGuests: number,

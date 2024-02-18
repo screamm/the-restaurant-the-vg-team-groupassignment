@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+
 export const BookingRender = () => {
-    const { id } = useParams();
+    const { id } = useParams<any>();
+    const [bookingData, setBookingData] = useState(null);
 
     useEffect(() => {
         if (id) {
@@ -11,6 +13,7 @@ export const BookingRender = () => {
                 .get(`https://school-restaurant-api.azurewebsites.net/booking/${id}`)
                 .then((response) => {
                     console.log('Get Booking', response.data);
+                    setBookingData(response.data);
                 })
                 .catch((error) => {
                     console.error('Error fetching booking:', error);
@@ -21,7 +24,14 @@ export const BookingRender = () => {
     return (
         <>
             <div>
-                Ditt bokningsId {id}
+            {bookingData ? (
+                <div>
+                    Ditt bokningsId {id}
+                    {/* Render booking data here */}
+                </div>
+            ) : (
+                <div>No booking data found</div>
+            )}
             </div>
         </>
     );};
