@@ -2,11 +2,16 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from "axios";
 
-export const AdminDeleteBooking = ({ booking }: { booking: any }) => {
+
+interface IbookingIdProps {
+    bookingId: string 
+}
+export const AdminDeleteBooking = ({ bookingId }: IbookingIdProps) => {
+
     const handleDelete = async () => {
         try {
             const response = await axios.delete(
-                `https://school-restaurant-api.azurewebsites.net/booking/delete/${booking._id}`
+                `https://school-restaurant-api.azurewebsites.net/booking/delete/${bookingId}`
             );
             console.log('Bokning har raderast:', response.data);
         } catch (error) {

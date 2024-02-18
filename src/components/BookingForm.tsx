@@ -2,13 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChangeEvent, SyntheticEvent } from "react";
 import { Link, useParams } from "react-router-dom";
-import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
-import { AdminDeleteBooking } from "./AdminDeleteBookings";
 
+import { IBookings } from "../models/IBookings";
 
 export const BookingForm = () => {
     const { id } = useParams();
-    const [restaurants, setRestaurants] = useState<IBookingsRestaurant []>([]);
+    const [restaurants, setRestaurants] = useState<IBookings[]>([]);
+
     const [addBooking, setAddBooking] = useState({
         restaurantId: '',
         date: '',
@@ -28,8 +28,10 @@ export const BookingForm = () => {
 
     const getRestaurants = async () => {
         try {
-            const response = await axios.get<IBookingsRestaurant[]>(
-                "https://school-restaurant-api.azurewebsites.net/restaurant/65c6276ee125e85f5e15b79f"
+
+            const response = await axios.get<IBookings[]>(
+                `https://school-restaurant-api.azurewebsites.net/restaurant/65c6276ee125e85f5e15b79f`
+
             );
             setRestaurants(response.data);
         } catch (error) {
@@ -81,8 +83,6 @@ export const BookingForm = () => {
                         <option value="0">None</option>
                         <option value="65c6276ee125e85f5e15b79f">Happy Dumpling</option>
 
-                    
-                    
                     </select>
                 </div>
 
