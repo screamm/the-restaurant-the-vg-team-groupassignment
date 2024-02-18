@@ -50,14 +50,15 @@ export const AdminHandleBookings = () => {
     console.log('handlechange', searchTerm);
   };
 
-  const handleDelete = async (customerId: string) => {
+  const handleDelete = async (_id: string) => {
     try {
       const response = await axios.delete(
-        `https://school-restaurant-api.azurewebsites.net/booking/delete/${customerId}`
+        `https://school-restaurant-api.azurewebsites.net/booking/delete/${_id}`
       );
-      
+
       console.log(response.data);
-      setBookings(prevBookings => prevBookings.filter(booking => booking.customerId !== customerId));
+      setBookings(prevBookings => prevBookings.filter(booking => booking._id !== _id));
+      setFilteredUsers(prevFilteredUsers => prevFilteredUsers.filter(booking => booking._id !== _id));
     } catch (error) {
       console.error("Error deleting booking:", error);
     }
@@ -78,10 +79,10 @@ export const AdminHandleBookings = () => {
 
       {filteredUsers.map((booking) => (
         <>
-        <li key={booking.id}>
-          {booking.date}, {booking.customerId}
+        <li key={booking._id}>
+          {booking.date}, {booking._id}
         </li>
-        <button onClick={() => handleDelete(booking.customerId)}>Delete</button>
+        <button onClick={() => handleDelete(booking._id)}>Delete</button>
         </>
       ))}
     </div>

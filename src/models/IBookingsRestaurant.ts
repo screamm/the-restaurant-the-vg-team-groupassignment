@@ -1,5 +1,5 @@
 export interface IBookingsRestaurant {
-    id: string,
+    _id: string,
     restaurantId: string,
     date: string,
     time: string,
