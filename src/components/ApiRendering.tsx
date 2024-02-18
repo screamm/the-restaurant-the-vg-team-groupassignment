@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { IRestaurant } from "../models/IRestaurant";
+import hamster from '../graphics/hamster.png';
 
 export const ApiRendering = () => {
   const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
@@ -18,14 +19,18 @@ export const ApiRendering = () => {
   }, []);
 
   return (
-    <div>
+    <div className="border-8 border-black">
       <ul>
       {restaurants.map((restaurant, index) => {
         return (
         <li key={index}>
-          <h1>{restaurant.name}</h1>
-          <p>{restaurant.address.street}</p>
-          <p>{restaurant.address.zip} {restaurant.address.city}</p>
+          <h1 className="border-8 border-pink-600">{restaurant.name}</h1>
+          <p className="border-8 border-pink-600">Adress: {restaurant.address} </p>
+          <p className="border-8 border-pink-600">{restaurant.zip} {restaurant.city}</p>
+          <p className="border-8 border-pink-600">RestaurangID: {restaurant._id} </p>
+
+          <img src={ hamster} alt="Hamster eating dumplings" className="border-8 border-yellow-400 min-h-80 m  "/>
+
         </li>
         );
         })}

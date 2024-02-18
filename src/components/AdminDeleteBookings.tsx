@@ -2,7 +2,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from "axios";
 
-export const AdminDeleteBooking = ({ bookingId }) => {
+export const AdminDeleteBooking = ({ booking }: { booking: any }) => {
     const handleDelete = async () => {
         try {
             const response = await axios.delete(
