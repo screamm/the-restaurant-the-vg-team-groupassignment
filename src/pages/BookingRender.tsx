@@ -4,11 +4,11 @@ import axios from "axios";
 
 
 export const BookingRender = () => {
-    const { id } = useParams<any>();
+    const { id } = useParams<string>();
     const [bookingData, setBookingData] = useState(null);
 
     useEffect(() => {
-        if (_id) {
+        if (id) {
             axios
                 .get(`https://school-restaurant-api.azurewebsites.net/booking/${id}`)
                 .then((response) => {
@@ -20,6 +20,8 @@ export const BookingRender = () => {
                 });
         }
     }, [id]);
+
+    
 
     return (
         <>
@@ -33,13 +35,7 @@ export const BookingRender = () => {
                 <div>No booking data found</div>
             )}
             </div>
-            <div>
-
-                <input type="text" placeholder="Skriv in ditt bokningsId" />          
-
-                <button type="submit" onClick={BookingRender}>Hämta bokning</button>
-               
-            </div>
+        
         </>
     );};
 

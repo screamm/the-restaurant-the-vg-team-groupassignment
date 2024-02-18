@@ -1,83 +1,83 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { AdminSearchBooking } from "./AdminSearchBookings";
 import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
-import { ICustomer } from "../models/ICustomer";
-import { AdminChangeBooking } from "./AdminChangeBookings";
-import { AdminDeleteBooking } from "./AdminDeleteBookings";
+import { ChangeEvent } from "react";
 
 export const AdminHandleBookings = () => {
   const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<IBookingsRestaurant[]>([]);
+  const [searchDate, setSearchDate] = useState('');
+  const [searchItem, setSearchItem] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState<IBookingsRestaurant[]>([]);
 
   useEffect(() => {
     getAllBookings();
   }, []);
 
   const getAllBookings = async () => {
-    const response = await axios.get(
-      `https://school-restaurant-api.azurewebsites.net/booking/restaurant/65c6276ee125e85f5e15b79f`
-    );
+    try {
 
-    const bookingsWithNames = await Promise.all(
-      response.data.map(async (booking: ICustomer) => {
-        const customerResponse = await axios.get(
-          `https://school-restaurant-api.azurewebsites.net/customer/${booking.customerId}`
+        const response = await axios.get(
+            `https://school-restaurant-api.azurewebsites.net/booking/restaurant/65c6276ee125e85f5e15b79f`
+
         );
-        const [user] = customerResponse.data;
-        return {
-          ...booking,
-          customerName: `${user.name} ${user.lastname}`,
-        };
-      })
+        setBookings(response.data);
+        setFilteredBookings([])
+    } catch (error) {
+        console.error("Error fetching restaurants:", error);
+    }
+};
+
+
+     
+  
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm);
+
+    const filteredItems = bookings.filter((user) =>
+      user.date.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setBookings(bookingsWithNames);
-    setFilteredBookings([]);
+
+    setFilteredUsers(filteredItems);
+    console.log('handlechange', searchTerm);
   };
 
-  const handleSearch = (searchTerm: string) => {
-    const filtered = bookings.filter((booking) =>
-      booking.customerName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredBookings(filtered);
-  };
+  
 
   return (
     <div>
-      <AdminSearchBooking handleSearch={handleSearch} />
-      <h2>Sökresultat:</h2>
-      {filteredBookings.length === 0 && (
-        <p>Finns ingen bokning med det angivna namnet!</p>
-      )}
-      <ul>
-        {filteredBookings.map((booking) => {
-          return (
-          <li key={booking._id}>
-            <p>
-              BokningsID: {booking._id} <br/>
-              Namn: {booking.customerName} {booking.customerLastname} <br/>
-              Datum: {booking.date} <br/>
-              Tid: {booking.time} <br/>
-              Antal gäster: {booking.numberOfGuests} <br/>
-            </p>
-            <AdminChangeBooking booking={booking} />
-            <AdminDeleteBooking bookingId={booking._id} />
-          </li>
-        );
-        })}
-      </ul>
-      
-      <h2>Alla bokningar:</h2>
-      <ul>
-      {bookings.map((booking) => (
-        <li key={booking._id}>
-          Namn: {booking.customerName} {booking.customerLastname} <br/>
-          Datum: {booking.date} <br/>
-          Tid: {booking.time} <br/>
-          Antal gäster: {booking.numberOfGuests} <br/>
+      <input
+        type="date"
+        name="date"
+        value={searchDate}
+        onChange={handleInputChange}
+      />
+
+
+      {filteredUsers.map((booking) => (
+        <li key={booking.id}>
+          {booking.date}, {booking.customerName}
         </li>
-        ))}
-      </ul>
-  </div>
-);
+      ))}
+    </div>
+  );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
