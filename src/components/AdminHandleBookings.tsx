@@ -6,6 +6,7 @@ import { ICustomer } from "../models/ICustomer";
 import { AdminChangeBooking } from "./AdminChangeBookings";
 import { AdminDeleteBooking } from "./AdminDeleteBookings";
 import { ChangeEvent } from "react";
+import {Link} from "react-router-dom";
 
 export const AdminHandleBookings = () => {
   const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
@@ -64,6 +65,9 @@ export const AdminHandleBookings = () => {
 
   return (
     <div>
+      <Link to={"/admin/add"}><button>Lägg till bokning</button></Link>
+      <br />
+      <label htmlFor="">Sök bokning på datum: </label>
       <input
         type="date"
         name="date"

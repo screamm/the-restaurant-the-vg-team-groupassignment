@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { IBookings } from "../models/IBookings";
 
-export const BookingForm = () => {
+export const AddBookingAdmin = () => {
     const { id } = useParams();
     const [restaurants, setRestaurants] = useState<IBookings[]>([]);
 
@@ -188,10 +188,11 @@ export const BookingForm = () => {
                     />
                 </div>
                 <button className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type="submit" value="Save Task">
-                    Book a table
+                    Add new booking
                 </button>
                 <br />
-                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Se din bokning här</Link>
+                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">See new booking</Link>
+            <Link to={`/admin`}>Go Back</Link>
             </form>
         </div>
     );
