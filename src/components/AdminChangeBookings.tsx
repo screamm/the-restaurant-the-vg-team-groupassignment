@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Popup from 'reactjs-popup';
 import axios from 'axios';
 import { IBookingsRestaurantChangeBooking } from '../models/IChangeBooking';
@@ -26,7 +26,7 @@ export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: I
             setNewNumberOfGuests(updatedBooking.numberOfGuests);
             updateBookingState(updatedBooking);
         } catch (error) {
-            console.error('Gick ej att uppdatera:', error);
+            console.error('Update not possible', error);
         }
     };
 
@@ -34,7 +34,7 @@ export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: I
 
     return (
         <Popup trigger={<button>Ändra</button>} position="right center">
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', backgroundColor: 'white', padding: '20px'}}>
                 Namn: {booking.customerName} {booking.customerLastname}
                 <input
                     type='date'
