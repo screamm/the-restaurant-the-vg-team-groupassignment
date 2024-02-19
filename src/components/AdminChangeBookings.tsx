@@ -11,12 +11,13 @@ export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantCh
 
     const changeBooking = async () => {
         try {
+            console.log('Startar uppdatering av bokning...');
             const response = await axios.put(
-                `https://school-restaurant-api.azurewebsites.net/booking/update/${booking._id}`,
+                `https://school-restaurant-api.azurewebsites.net/booking/update/${updatedbooking._id}`,
                 {
-                    date: newDate,
-                    time: newTime,
-                    numberOfGuests: newNumberOfGuests,
+                    date: updatedBooking.date,
+                    time: updatedBooking.time,
+                    numberOfGuests: updatedBooking.numberOfGuests,
                     id: booking._id
                 }
             );
@@ -26,6 +27,8 @@ export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantCh
         }
     };
 
+    console.log('Renderar AdminChangeBooking-komponenten med bokning:', booking);
+
     return (
         <Popup trigger={<button>Ändra</button>} position="right center">
             <div>
@@ -33,11 +36,17 @@ export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantCh
                 <input
                     type='date'
                     value={newDate}
-                    onChange={(e) => setNewDate(e.target.value)}
+                    onChange={(e) => {
+                        console.log('Nytt datum valt:', e.target.value);
+                        setNewDate(e.target.value);
+                    }}
                 />
                 <select
                     value={newTime}
-                    onChange={(e) => setNewTime(e.target.value)}
+                    onChange={(e) => {
+                        console.log('Ny tid vald:', e.target.value);
+                        setNewTime(e.target.value);
+                    }}
                 >
                     <option value='18:00'>18:00</option>
                     <option value='21:00'>21:00</option>
@@ -45,10 +54,22 @@ export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantCh
                 <input
                     type='number'
                     value={newNumberOfGuests}
-                    onChange={(e) => setNewNumberOfGuests(parseInt(e.target.value))}
+                    onChange={(e) => {
+                        console.log('Nytt antal gäster valt:', e.target.value);
+                        setNewNumberOfGuests(parseInt(e.target.value));
+                    }}
                 />
-                <button onClick={changeBooking}>Spara</button>
+                <button onClick={() => {
+                    console.log('Sparaknappen klickad, startar uppdatering...');
+                    changeBooking({
+                        date: newDate,
+                        time: newTime,
+                        newNumberOfGuests: newNumberOfGuests,
+                        id: booking._id
+                    });
+                }}>Spara</button>
             </div>
         </Popup>
     );
 };
+
