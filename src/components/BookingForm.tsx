@@ -83,6 +83,7 @@ export const BookingForm = () => {
 
     if(filteredItems.length >= 2){
         console.log('datumet är fullbokat')
+        alert("Datumet är fullbokat")
     }
 
     
@@ -101,6 +102,7 @@ export const BookingForm = () => {
 
     if(filteredTime.length >= 2){
         console.log('tiden är fullbokat')
+        alert("Tiden är fullbokad")
     }
 
   };
@@ -139,24 +141,6 @@ export const BookingForm = () => {
         .then((response) => {
             console.log('New booking created successfully:', response.data);
            
-            // setRestaurants(prevRestaurants => {
-            //     const updatedRestaurants = [...prevRestaurants, response.data];
-                
-            //     console.log("Updated restaurants:", updatedRestaurants);
-                
-               
-            //     const bookingsForSelectedDate= updatedRestaurants.filter(booking => booking.date === addBooking.date);
-            //     console.log("Bookings for selected date and time:", bookingsForSelectedDate);
-            //     const bookingsForSelectedTime= updatedRestaurants.filter(booking => booking.time === addBooking.time);
-            //     console.log("Bookings for selected date and time:", bookingsForSelectedDate);
-                
-            
-            //     if (bookingsForSelectedDate.length >= 2 ) {
-            //         console.log("Fully booked for the selected date");
-            //     }
-                
-            //     return updatedRestaurants;
-            // });
         })
         .catch((error) => {
             console.error('Error creating booking:', error);
@@ -280,75 +264,3 @@ export const BookingForm = () => {
         </div>
     );
 };
-// useEffect(() => {
-//     getAllBookings();
-//   }, []);
-
-//   const getAllBookings = async () => {
-//     try {
-
-//         const response = await axios.get(
-//             `https://school-restaurant-api.azurewebsites.net/booking/restaurant/65c6276ee125e85f5e15b79f`
-
-//         );
-        
-//         setBookings(response.data);
-//         setFilteredBookings([])
-//     } catch (error) {
-//         console.error("Error fetching restaurants:", error);
-//     }
-// };
-
-
-     
-  
-
-//   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-//     const searchTerm = e.target.value;
-//     setSearchItem(searchTerm);
-
-//     const filteredItems = bookings.filter((user) =>
-//       user.date.toLowerCase().includes(searchTerm.toLowerCase())
-//     );
-
-//     setFilteredUsers(filteredItems);
-//     console.log('handlechange', searchTerm);
-//   };
-
-//   const handleDelete = async (customerId: string) => {
-//     try {
-//       const response = await axios.delete(
-//         `https://school-restaurant-api.azurewebsites.net/booking/delete/${customerId}`
-//       );
-      
-//       console.log(response.data);
-//       setBookings(prevBookings => prevBookings.filter(booking => booking.customerId !== customerId));
-//     } catch (error) {
-//       console.error("Error deleting booking:", error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <Link to={"/admin/add"}><button>Lägg till bokning</button></Link>
-//       <br />
-//       <label htmlFor="">Sök bokning på datum: </label>
-//       <input
-//         type="date"
-//         name="date"
-//         value={searchDate}
-//         onChange={handleInputChange}
-//       />
-
-
-//       {filteredUsers.map((booking) => (
-//         <>
-//         <li key={booking.id}>
-//           {booking.date}, {booking.customerId}
-//         </li>
-//         <button onClick={() => handleDelete(booking.customerId)}>Delete</button>
-//         </>
-//       ))}
-//     </div>
-//   );
-// };
