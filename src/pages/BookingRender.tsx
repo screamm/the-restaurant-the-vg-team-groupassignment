@@ -29,7 +29,6 @@ export const BookingRender = () => {
             {bookingData ? (
                 <div>
                     Ditt bokningsId {id}
-                    {/* Render booking data here */}
                 </div>
             ) : (
                 <div>No booking data found</div>
