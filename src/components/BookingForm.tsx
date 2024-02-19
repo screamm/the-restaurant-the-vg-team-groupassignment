@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChangeEvent, SyntheticEvent } from "react";
-import { Link, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import { IBookings } from "../models/IBookings";
 import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
 
@@ -126,42 +125,103 @@ export const BookingForm = () => {
         }
     };
 
-    
+
+
+
     const onSubmit = (e: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
         e.preventDefault();
-  
-    if (!addBooking.date || !addBooking.time) {
-        console.log("Please select date and time.");
+    
+        if (!addBooking.date || !addBooking.time) {
+          console.log("Please select date and time.");
+          return;
+        }
+    
+        // Check for existing bookings for the same time slot and restaurant
+        const existingBookings = restaurants.filter(
+          booking =>
+            booking._id === addBooking._id &&
+            booking.date === addBooking.date &&
+            booking.time === addBooking.time
+        );
+
+        console.log("Existing bookings:", existingBookings);
+    
+        if (existingBookings.length >= 2) {
+          alert("Sorry, this time slot is fully booked. Please choose a different time or date.");
+          return;
+        }
+
+
+
+    
+            const isConfirmed = window.confirm(
+                `TACK FÖR DIN BOKNING!!
+                Vi vill informera dig om att vi tar din integritet på allvar. Som en del av vår strävan att skydda dina personuppgifter och för att följa de nya reglerna enligt GDPR, har vi uppdaterat våra sekretesspolicyer.
+                Genom att fortsätta boka bord hos oss, samtycker du till vår uppdaterade sekretesspolicy där vi tydligt förklarar hur vi samlar in, använder och skyddar dina personuppgifter. Vi försäkrar dig om att dina uppgifter endast används för att hantera din bokning och för att förbättra din upplevelse hos oss.
+                Om du har några frågor eller funderingar angående hur vi hanterar dina personuppgifter, är du välkommen att kontakta oss.
+                Tack för att du väljer att boka bord hos oss!
+        
+                Om du väljer "Cancel" kommer din bokning kommer att avbrytas.`
+            );
+        
+            if (isConfirmed) {
+                console.log("Booking confirmed");
+
+             
+
+
+    
+        axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", addBooking)
+            .then((response) => {
+                console.log('New booking created successfully:', response.data);
+
+                // Update restaurants state with the new booking
+                setRestaurants(prevRestaurants => {
+                    const updatedRestaurants = [...prevRestaurants, response.data];
+                    return updatedRestaurants;
+
+
+                });
+
+                                      // Extract the id from the response data
+                                      const newBookingId = response.data.insertedId;
+                                    console.log("newBookingId", newBookingId);
+
+
+                
+                                      // Redirect to the booking page with the new id
+                                      window.location.href = `/booking/${newBookingId}`;
+
+
+                                    // return (
+                                    //     <div>
+                                    //         <p>{response.data.time}</p>
+                                    //         <p>{newBookingId.time}</p>
+                                    //     </div>
+                                    // );
+                                        
+                                      
+
+                        
+
+            })
+            .catch((error) => {
+                console.error('Error creating booking:', error);
+            });
+
+
+
+    } else {
+        console.log("Booking cancelled");
         return;
     }
 
-    axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", addBooking)
-        .then((response) => {
-            console.log('New booking created successfully:', response.data);
-           
-            // setRestaurants(prevRestaurants => {
-            //     const updatedRestaurants = [...prevRestaurants, response.data];
-                
-            //     console.log("Updated restaurants:", updatedRestaurants);
-                
-               
-            //     const bookingsForSelectedDate= updatedRestaurants.filter(booking => booking.date === addBooking.date);
-            //     console.log("Bookings for selected date and time:", bookingsForSelectedDate);
-            //     const bookingsForSelectedTime= updatedRestaurants.filter(booking => booking.time === addBooking.time);
-            //     console.log("Bookings for selected date and time:", bookingsForSelectedDate);
-                
-            
-            //     if (bookingsForSelectedDate.length >= 2 ) {
-            //         console.log("Fully booked for the selected date");
-            //     }
-                
-            //     return updatedRestaurants;
-            // });
-        })
-        .catch((error) => {
-            console.error('Error creating booking:', error);
-        });
-    }
+};
+
+
+
+
+
     return (
         <div className="m-4 border-8 border-pink-600">
             <h2>See free tables</h2>
@@ -275,7 +335,7 @@ export const BookingForm = () => {
                     Book a table
                 </button>
                 <br />
-                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Se din bokning här</Link>
+                {/* <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Se din bokning här</Link> */}
             </form>
         </div>
     );
