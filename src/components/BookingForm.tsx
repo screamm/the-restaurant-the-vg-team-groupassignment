@@ -4,10 +4,16 @@ import { ChangeEvent, SyntheticEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { IBookings } from "../models/IBookings";
+import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
 
 export const BookingForm = () => {
     const { id } = useParams();
     const [restaurants, setRestaurants] = useState<IBookings[]>([]);
+    const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
+    const [filteredBookings, setFilteredBookings] = useState<IBookingsRestaurant[]>([]);
+    const [searchItem, setSearchItem] = useState('');
+    const [searchDate, setSearchDate] = useState('');
+    const [searchTime, setSearchTime] = useState('');
 
     const [addBooking, setAddBooking] = useState({
         restaurantId: '',
@@ -39,6 +45,68 @@ export const BookingForm = () => {
         }
     };
 
+   
+        
+    
+   useEffect(() => {
+    getAllBookings();
+  }, []);
+
+  const getAllBookings = async () => {
+    try {
+
+        const response = await axios.get(
+            `https://school-restaurant-api.azurewebsites.net/booking/restaurant/65c6276ee125e85f5e15b79f`
+
+        );
+        console.log(response.data)
+        setBookings(response.data);
+        setFilteredBookings([])
+    } catch (error) {
+        console.error("Error fetching restaurants:", error);
+    }
+};
+
+
+  
+
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm);
+
+    const filteredItems = bookings.filter((user) =>
+      user.date.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredBookings(filteredItems);
+    console.log('handlechange', filteredItems);
+
+    if(filteredItems.length >= 2){
+        console.log('datumet är fullbokat')
+    }
+
+    
+
+  };
+  const handleTimeChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm);
+
+    const filteredTime = filteredBookings.filter((user) =>
+      user.time.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredBookings(filteredTime);
+    console.log('handlechangeTime', filteredTime);
+
+    if(filteredTime.length >= 2){
+        console.log('tiden är fullbokat')
+    }
+
+  };
+
+  
+
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         if (name.startsWith("customer.")) {
@@ -58,6 +126,7 @@ export const BookingForm = () => {
         }
     };
 
+    
     const onSubmit = (e: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
         e.preventDefault();
   
@@ -70,22 +139,24 @@ export const BookingForm = () => {
         .then((response) => {
             console.log('New booking created successfully:', response.data);
            
-            setRestaurants(prevRestaurants => {
-                const updatedRestaurants = [...prevRestaurants, response.data];
+            // setRestaurants(prevRestaurants => {
+            //     const updatedRestaurants = [...prevRestaurants, response.data];
                 
-                console.log("Updated restaurants:", updatedRestaurants);
+            //     console.log("Updated restaurants:", updatedRestaurants);
                 
                
-                const bookingsForSelectedDateAndTime = updatedRestaurants.filter(booking => booking.date === addBooking.date && booking.time === addBooking.time);
-                console.log("Bookings for selected date and time:", bookingsForSelectedDateAndTime);
+            //     const bookingsForSelectedDate= updatedRestaurants.filter(booking => booking.date === addBooking.date);
+            //     console.log("Bookings for selected date and time:", bookingsForSelectedDate);
+            //     const bookingsForSelectedTime= updatedRestaurants.filter(booking => booking.time === addBooking.time);
+            //     console.log("Bookings for selected date and time:", bookingsForSelectedDate);
                 
             
-                if (bookingsForSelectedDateAndTime.length >= 2) {
-                    console.log("Fully booked for the selected date and time.");
-                }
+            //     if (bookingsForSelectedDate.length >= 2 ) {
+            //         console.log("Fully booked for the selected date");
+            //     }
                 
-                return updatedRestaurants;
-            });
+            //     return updatedRestaurants;
+            // });
         })
         .catch((error) => {
             console.error('Error creating booking:', error);
@@ -93,6 +164,19 @@ export const BookingForm = () => {
     }
     return (
         <div className="m-4 border-8 border-pink-600">
+            <h2>See free tables</h2>
+            <input
+            type="date"
+            name="date"
+            value={searchDate}
+            onChange={handleDateChange}
+            />
+            <h2>see free times</h2>
+            <select name="seeTime" value={searchTime} onChange={handleTimeChange}>
+            <option value="">Select Time</option>
+            <option value="18.00">18:00</option>
+            <option value="21.00">21:00</option>
+            </select>
             <h2>Make your reservation</h2>
             <form action="" onSubmit={onSubmit}>
                 <div>
@@ -102,7 +186,7 @@ export const BookingForm = () => {
                         value={addBooking.restaurantId}
                         onChange={handleInputChange}>
                     
-                        <option value="0">None</option>
+                        <option value="">Select Restaurant</option>
                         <option value="65c6276ee125e85f5e15b79f">Happy Dumpling</option>
 
                     </select>
@@ -126,7 +210,7 @@ export const BookingForm = () => {
                         value={addBooking.time}
                         onChange={handleInputChange}
                     >
-                        <option value="0">0</option>
+                        <option value="">Select Time</option>
                         <option value="18.00">18:00</option>
                         <option value="21.00">21:00</option>
                     </select>
@@ -138,7 +222,7 @@ export const BookingForm = () => {
                         value={addBooking.numberOfGuests}
                         onChange={handleInputChange}
                     >
-                        <option value="0">0</option>
+                        <option value="">Select seats</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -196,3 +280,75 @@ export const BookingForm = () => {
         </div>
     );
 };
+// useEffect(() => {
+//     getAllBookings();
+//   }, []);
+
+//   const getAllBookings = async () => {
+//     try {
+
+//         const response = await axios.get(
+//             `https://school-restaurant-api.azurewebsites.net/booking/restaurant/65c6276ee125e85f5e15b79f`
+
+//         );
+        
+//         setBookings(response.data);
+//         setFilteredBookings([])
+//     } catch (error) {
+//         console.error("Error fetching restaurants:", error);
+//     }
+// };
+
+
+     
+  
+
+//   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+//     const searchTerm = e.target.value;
+//     setSearchItem(searchTerm);
+
+//     const filteredItems = bookings.filter((user) =>
+//       user.date.toLowerCase().includes(searchTerm.toLowerCase())
+//     );
+
+//     setFilteredUsers(filteredItems);
+//     console.log('handlechange', searchTerm);
+//   };
+
+//   const handleDelete = async (customerId: string) => {
+//     try {
+//       const response = await axios.delete(
+//         `https://school-restaurant-api.azurewebsites.net/booking/delete/${customerId}`
+//       );
+      
+//       console.log(response.data);
+//       setBookings(prevBookings => prevBookings.filter(booking => booking.customerId !== customerId));
+//     } catch (error) {
+//       console.error("Error deleting booking:", error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <Link to={"/admin/add"}><button>Lägg till bokning</button></Link>
+//       <br />
+//       <label htmlFor="">Sök bokning på datum: </label>
+//       <input
+//         type="date"
+//         name="date"
+//         value={searchDate}
+//         onChange={handleInputChange}
+//       />
+
+
+//       {filteredUsers.map((booking) => (
+//         <>
+//         <li key={booking.id}>
+//           {booking.date}, {booking.customerId}
+//         </li>
+//         <button onClick={() => handleDelete(booking.customerId)}>Delete</button>
+//         </>
+//       ))}
+//     </div>
+//   );
+// };
