@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChangeEvent, SyntheticEvent } from "react";
-import { Link, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import { IBookings } from "../models/IBookings";
 
 export const BookingForm = () => {
@@ -112,18 +111,43 @@ export const BookingForm = () => {
                 setRestaurants(prevRestaurants => {
                     const updatedRestaurants = [...prevRestaurants, response.data];
                     return updatedRestaurants;
+
+
                 });
+
+                                      // Extract the id from the response data
+                                      const newBookingId = response.data.insertedId;
+                                    console.log("newBookingId", newBookingId);
+
+
+                
+                                      // Redirect to the booking page with the new id
+                                      window.location.href = `/booking/${newBookingId}`;
+
+
+                                    // return (
+                                    //     <div>
+                                    //         <p>{response.data.time}</p>
+                                    //         <p>{newBookingId.time}</p>
+                                    //     </div>
+                                    // );
+                                        
+                                      
+
+                        
+
             })
             .catch((error) => {
                 console.error('Error creating booking:', error);
             });
-      
+
 
 
     } else {
         console.log("Booking cancelled");
         return;
     }
+
 };
 
 
@@ -230,7 +254,7 @@ export const BookingForm = () => {
                     Book a table
                 </button>
                 <br />
-                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Se din bokning här</Link>
+                {/* <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Se din bokning här</Link> */}
             </form>
         </div>
     );
