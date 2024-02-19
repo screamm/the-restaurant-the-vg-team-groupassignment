@@ -1,27 +1,30 @@
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
-import { useState } from 'react';
 import { IBookingsRestaurantChangeBooking } from '../models/IChangeBooking';
 
-export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantChangeBooking }) => {
+export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: IBookingsRestaurantChangeBooking, updateBookingState: Function }) => {
     const [newDate, setNewDate] = useState(booking.date);
     const [newTime, setNewTime] = useState(booking.time);
     const [newNumberOfGuests, setNewNumberOfGuests] = useState(booking.numberOfGuests);
 
-    const changeBooking = async () => {
+    const changeBooking = async (updatedBooking: IBookingsRestaurantChangeBooking) => {
         try {
             console.log('Startar uppdatering av bokning...');
             const response = await axios.put(
-                `https://school-restaurant-api.azurewebsites.net/booking/update/${updatedbooking._id}`,
+                `https://school-restaurant-api.azurewebsites.net/booking/update/${updatedBooking.id}`,
                 {
                     date: updatedBooking.date,
                     time: updatedBooking.time,
                     numberOfGuests: updatedBooking.numberOfGuests,
-                    id: booking._id
+                    id: updatedBooking.id
                 }
             );
             console.log('Bokningen uppdaterades:', response.data);
+            setNewDate(updatedBooking.date);
+            setNewTime(updatedBooking.time);
+            setNewNumberOfGuests(updatedBooking.numberOfGuests);
+            updateBookingState(updatedBooking);
         } catch (error) {
             console.error('Gick ej att uppdatera:', error);
         }
@@ -64,7 +67,7 @@ export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantCh
                     changeBooking({
                         date: newDate,
                         time: newTime,
-                        newNumberOfGuests: newNumberOfGuests,
+                        numberOfGuests: newNumberOfGuests,
                         id: booking._id
                     });
                 }}>Spara</button>
@@ -72,4 +75,6 @@ export const AdminChangeBooking = ({ booking }: { booking: IBookingsRestaurantCh
         </Popup>
     );
 };
+
+
 
