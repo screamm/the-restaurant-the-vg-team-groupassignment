@@ -5,6 +5,7 @@ import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
 import { ICustomer } from "../models/ICustomer";
 import { AdminChangeBooking } from "./AdminChangeBookings";
 import { Link } from "react-router-dom";
+import { IBookingsRestaurantChangeBooking } from '../models/IChangeBooking';
 
 export const AdminHandleBookings = () => {
   const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
@@ -64,6 +65,22 @@ export const AdminHandleBookings = () => {
     }
   };
 
+  const updateBookingState = (updatedBooking: IBookingsRestaurantChangeBooking) => {
+    const updatedBookings = bookings.map(booking => {
+        if (booking._id === updatedBooking.id) {
+            return {
+                ...booking,
+                date: updatedBooking.date,
+                time: updatedBooking.time,
+                numberOfGuests: updatedBooking.numberOfGuests
+            };
+        }
+        return booking;
+    });
+    setBookings(updatedBookings);
+    setFilteredBookings(updatedBookings);
+};
+
   return (
     <div>
       <Link to={"/admin/add"}><button>Lägg till bokning</button></Link>
@@ -84,7 +101,7 @@ export const AdminHandleBookings = () => {
                 Tid: {booking.time} <br />
                 Antal gäster: {booking.numberOfGuests} <br />
               </p>
-              <AdminChangeBooking booking={booking} />
+              <AdminChangeBooking booking={booking} updateBookingState={updateBookingState} />
               <button onClick={() => handleDelete(booking._id)}>Radera</button>
             </li>
           );
