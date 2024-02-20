@@ -4,6 +4,7 @@ import { ChangeEvent, SyntheticEvent } from "react";
 import { useParams } from "react-router-dom";
 import { IBookings } from "../models/IBookings";
 import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
+import CircularProgress from '@mui/joy/CircularProgress';
 
 export const BookingForm = () => {
   const { id } = useParams();
@@ -13,6 +14,7 @@ export const BookingForm = () => {
   const [searchItem, setSearchItem] = useState("");
   const [searchDate, setSearchDate] = useState("");
   const [searchTime, setSearchTime] = useState("");
+  const [loading, setLoading] = useState(false); 
 
   const [addBooking, setAddBooking] = useState({
     restaurantId: "",
@@ -72,7 +74,7 @@ export const BookingForm = () => {
     setFilteredBookings(filteredItems);
     console.log("handlechange", filteredItems);
 
-    if (filteredItems.length >= 2) {
+    if (filteredItems.length >= 4) {
       console.log("datumet är fullbokat");
       alert("Datumet är fullbokat");
     }
@@ -146,26 +148,22 @@ export const BookingForm = () => {
         .then((response) => {
           console.log("New booking created successfully:", response.data);
 
-          // Update restaurants state with the new booking
+         
           setRestaurants((prevRestaurants) => {
             const updatedRestaurants = [...prevRestaurants, response.data];
             return updatedRestaurants;
           });
 
-          // Extract the id from the response data
+          
           const newBookingId = response.data.insertedId;
           console.log("newBookingId", newBookingId);
 
 
-          // Redirect to the booking page with the new id
+          
+
+          setLoading(true);
           window.location.href = `/booking/${newBookingId}`;
 
-          // return (
-          //     <div>
-          //         <p>{response.data.time}</p>
-          //         <p>{newBookingId.time}</p>
-          //     </div>
-          // );
         })
         .catch((error) => {
           console.error("Error creating booking:", error);
@@ -178,6 +176,7 @@ export const BookingForm = () => {
 
   return (
     <div className="m-4 border-8 border-pink-600">
+      { loading &&<CircularProgress />}
       <h2>See free tables</h2>
       <input
         type="date"
@@ -291,7 +290,7 @@ export const BookingForm = () => {
           Book a table
         </button>
         <br />
-        {/* <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Se din bokning här</Link> */}
+        
       </form>
     </div>
   );
