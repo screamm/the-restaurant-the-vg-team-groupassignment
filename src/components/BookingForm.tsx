@@ -156,17 +156,6 @@ export const BookingForm = () => {
           const newBookingId = response.data.insertedId;
           console.log("newBookingId", newBookingId);
 
-          axios
-            .post(
-              "https://school-restaurant-api.azurewebsites.net/booking/create",
-              addBooking
-            )
-            .then((response) => {
-              console.log("New booking created successfully:", response.data);
-            })
-            .catch((error) => {
-              console.error("Error creating booking:", error);
-            });
 
           // Redirect to the booking page with the new id
           window.location.href = `/booking/${newBookingId}`;
