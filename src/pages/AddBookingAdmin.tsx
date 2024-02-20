@@ -92,17 +92,17 @@ export const AddBookingAdmin = () => {
         });
     }
     return (
-        <div className="m-4 border-8 border-pink-600">
-            <h2>Make your reservation</h2>
+        <div className="m-4 ">
+            <h2 className='font-bold mb-2'>Gör en ny bokning</h2>
             <form action="" onSubmit={onSubmit}>
                 <div>
-                    <label>Choose restaurant</label>
+                    <label className='m-4'>Restaurang</label>
                     <select
                         name="restaurantId"
                         value={addBooking.restaurantId}
                         onChange={handleInputChange}>
                     
-                        <option value="">Select Restaurant</option>
+                        <option value="">Välj Restaurang</option>
                         <option value="65c6276ee125e85f5e15b79f">Happy Dumpling</option>
 
                     </select>
@@ -110,7 +110,7 @@ export const AddBookingAdmin = () => {
 
 
                 <div>
-                    <label>Date</label>
+                    <label className='m-4'>Datum</label>
                     <input
                         type="date"
                         placeholder="Add Date"
@@ -120,7 +120,7 @@ export const AddBookingAdmin = () => {
                     />
                 </div>
                 <div>
-                    <label>Time</label>
+                    <label className='m-4'>Sittning</label>
                     <select
                         name="time"
                         value={addBooking.time}
@@ -132,7 +132,7 @@ export const AddBookingAdmin = () => {
                     </select>
                 </div>
                 <div>
-                    <label>How many seats</label>
+                    <label className='m-4'>Antal</label>
                     <select
                         name="numberOfGuests"
                         value={addBooking.numberOfGuests}
@@ -148,51 +148,51 @@ export const AddBookingAdmin = () => {
                     </select>
                 </div>
                 <div>
-                    <label>Name</label>
+                    <label className='m-4'>Förnamn</label>
                     <input
                         type="text"
-                        placeholder="Name"
+                        placeholder="Förnamn"
                         name="customer.name"
                         value={addBooking.customer.name}
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label>LastName</label>
+                    <label className='m-4'>Efternamn</label>
                     <input
                         type="text"
-                        placeholder="LastName"
+                        placeholder="Efternamn"
                         name="customer.lastname"
                         value={addBooking.customer.lastname}
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label>Email</label>
+                    <label className='m-4'>Epost</label>
                     <input
                         type="text"
-                        placeholder="Email"
+                        placeholder="Epost"
                         name="customer.email"
                         value={addBooking.customer.email}
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label>Phone</label>
+                    <label className='m-4'>Mobil</label>
                     <input
                         type="text"
-                        placeholder="Phone"
+                        placeholder="Mobilnummer"
                         name="customer.phone"
                         value={addBooking.customer.phone}
                         onChange={handleInputChange}
                     />
                 </div>
-                <button className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type="submit" value="Save Task">
-                    Add new booking
+                <button className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4" type="submit" value="Save Task">
+                    Lägg till bokning
                 </button>
                 <br />
-                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">See new booking</Link>
-            <Link to={`/admin`}>Go Back</Link>
+                <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4">See new booking</Link>
+            <Link to={`/admin`} className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4">Tillbaka till admin</Link>
             </form>
         </div>
     );

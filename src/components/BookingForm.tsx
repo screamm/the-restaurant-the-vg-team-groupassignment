@@ -175,37 +175,37 @@ export const BookingForm = () => {
   };
 
   return (
-    <div className="m-4 border-8 border-pink-600">
+    <div className="m-4">
       { loading &&<CircularProgress />}
-      <h2>See free tables</h2>
+      <h2 className='font-bold mb-2'>Välja datum för att se om det finns lediga bord</h2>
       <input
         type="date"
         name="date"
         value={searchDate}
         onChange={handleDateChange}
       />
-      <h2>see free times</h2>
+      <h2 className='font-bold mt-4'>Välj sittning för att se om det finns lediga bord</h2>
       <select name="seeTime" value={searchTime} onChange={handleTimeChange}>
-        <option value="">Select Time</option>
+        <option value="">Välj Sittning</option>
         <option value="18.00">18:00</option>
         <option value="21.00">21:00</option>
       </select>
-      <h2>Make your reservation</h2>
+      <h2 className='font-bold mt-4'>Fyll i formulär nedan för att boka bord</h2>
       <form action="" onSubmit={onSubmit}>
         <div>
-          <label>Choose restaurant</label>
+          <label className='m-4'>Restaurang</label>
           <select
             name="restaurantId"
             value={addBooking.restaurantId}
             onChange={handleInputChange}
           >
-            <option value="">Select Restaurant</option>
+            <option value="">Välj Restaurang</option>
             <option value="65c6276ee125e85f5e15b79f">Happy Dumpling</option>
           </select>
         </div>
 
         <div>
-          <label>Date</label>
+          <label className='m-4'>Datum</label>
           <input
             type="date"
             placeholder="Add Date"
@@ -215,25 +215,25 @@ export const BookingForm = () => {
           />
         </div>
         <div>
-          <label>Time</label>
+          <label className='m-4'>Sittning</label>
           <select
             name="time"
             value={addBooking.time}
             onChange={handleInputChange}
           >
-            <option value="">Select Time</option>
+            <option value="">Välj Sittning</option>
             <option value="18.00">18:00</option>
             <option value="21.00">21:00</option>
           </select>
         </div>
         <div>
-          <label>How many seats</label>
+          <label className='m-4'>Antal </label>
           <select
             name="numberOfGuests"
             value={addBooking.numberOfGuests}
             onChange={handleInputChange}
           >
-            <option value="">Select seats</option>
+            <option value="">Antal Gäster</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -243,40 +243,40 @@ export const BookingForm = () => {
           </select>
         </div>
         <div>
-          <label>Name</label>
+          <label className='m-4'>Förnamn</label>
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Förnamn"
             name="customer.name"
             value={addBooking.customer.name}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label>LastName</label>
+          <label className='m-4'>Efternamn</label>
           <input
             type="text"
-            placeholder="LastName"
+            placeholder="Efternamn"
             name="customer.lastname"
             value={addBooking.customer.lastname}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label>Email</label>
+          <label className='m-4'>Epost</label>
           <input
             type="text"
-            placeholder="Email"
+            placeholder="Epost"
             name="customer.email"
             value={addBooking.customer.email}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label>Phone</label>
+          <label className='m-4'>Mobil</label>
           <input
             type="text"
-            placeholder="Phone"
+            placeholder="Mobilnummer"
             name="customer.phone"
             value={addBooking.customer.phone}
             onChange={handleInputChange}

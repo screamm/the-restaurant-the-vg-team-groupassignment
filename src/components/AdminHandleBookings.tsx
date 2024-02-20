@@ -84,7 +84,7 @@ export const AdminHandleBookings = () => {
       <Link to={"/admin/add"}><button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4">Lägg till bokning</button></Link>
       <br />
       <AdminSearchBooking handleSearch={handleSearch} />
-      <h2>Sökresultat:</h2>
+      <h2 className="font-bold mb-4 mt-10 ">Sökresultat:</h2>
         {filteredBookings.length === 0 && (
           <p>Finns ingen bokning med det angivna namnet!</p>
         )}
@@ -92,7 +92,7 @@ export const AdminHandleBookings = () => {
         {filteredBookings.map((booking) => {
           return (
             <li key={booking._id}>
-              <p>
+              <p >
                 BokningsID: {booking._id} <br />
                 Namn: {booking.customerName} {booking.customerLastname} <br />
                 Datum: {booking.date} <br />

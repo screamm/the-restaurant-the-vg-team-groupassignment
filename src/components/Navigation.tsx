@@ -3,18 +3,18 @@ import { NavLink } from "react-router-dom";
 export const Navigation = () => {
     return (
         <nav>
-            <ul className="flex flex-row gap-10 border-2 border-gray-600 ">
+            <ul className="flex flex-row gap-10  ">
                 <li>
-                    <NavLink to={"/"} className="border-2 border-gray-600">Start</NavLink>
+                    <NavLink to={"/"} className="">Start</NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/booking"} className="border-2 border-gray-600">Bokning</NavLink>
+                    <NavLink to={"/booking"} className="">Bokning</NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/contact"} className="border-2 border-gray-600">Kontakt</NavLink>
+                    <NavLink to={"/contact"} className="">Kontakt</NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/admin"} className="border-2 border-gray-600">Admin</NavLink>
+                    <NavLink to={"/admin"} className="">Admin</NavLink>
                 </li>
             </ul>
         </nav>

@@ -33,8 +33,8 @@ export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: I
     console.log('Renderar AdminChangeBooking-komponenten med bokning:', booking);
  
     return (
-        <Popup trigger={<button>Ändra</button>} position="right center">
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', backgroundColor: 'white', padding: '20px'}}>
+        <Popup trigger={<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4 ">Ändra</button>} position="right center">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', backgroundColor: 'white', padding: '20px'}} >
                 Namn: {booking.customerName} {booking.customerLastname}
                 <input
                     type='date'
@@ -62,7 +62,7 @@ export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: I
                         setNewNumberOfGuests(parseInt(e.target.value));
                     }}
                 />
-                <button onClick={() => {
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded " onClick={() => {
                     console.log('Sparaknappen klickad, startar uppdatering...');
                     changeBooking({
                         date: newDate,

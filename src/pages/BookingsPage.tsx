@@ -9,7 +9,7 @@ export const BookingsPage = () => {
 
 
 
-    <p>Booking</p>
+    
     
     <BookingForm />
     
