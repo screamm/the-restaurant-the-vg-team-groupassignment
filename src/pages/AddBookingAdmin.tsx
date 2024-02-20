@@ -102,7 +102,7 @@ export const AddBookingAdmin = () => {
                         value={addBooking.restaurantId}
                         onChange={handleInputChange}>
                     
-                        <option value="0">None</option>
+                        <option value="">Select Restaurant</option>
                         <option value="65c6276ee125e85f5e15b79f">Happy Dumpling</option>
 
                     </select>

@@ -20,6 +20,16 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  
+    "compilerOptions": {
+      "lib": ["es6", "dom"],
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "strictNullChecks": true
+    },
+  
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  
+
 }
