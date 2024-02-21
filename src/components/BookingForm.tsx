@@ -15,6 +15,8 @@ export const BookingForm = () => {
   const [searchDate, setSearchDate] = useState("");
   const [searchTime, setSearchTime] = useState("");
   const [loading, setLoading] = useState(false); 
+  const [dateMessage, setDateMessage] = useState("");
+  const [timeMessage, setTimeMessage] = useState("");
 
   const [addBooking, setAddBooking] = useState({
     restaurantId: "",
@@ -74,9 +76,13 @@ export const BookingForm = () => {
     setFilteredBookings(filteredItems);
     console.log("handlechange", filteredItems);
 
-    if (filteredItems.length >= 4) {
+    if (filteredItems.length >= 30) {
       console.log("datumet är fullbokat");
+      setDateMessage("Datumet är fullbokat");
       alert("Datumet är fullbokat");
+    }
+    else {
+      setDateMessage("Datumet är tillgängligt. Välj en sittning");
     }
   };
   const handleTimeChange = (
@@ -92,9 +98,14 @@ export const BookingForm = () => {
     setFilteredBookings(filteredTime);
     console.log("handlechangeTime", filteredTime);
 
-    if (filteredTime.length >= 2) {
+    if (filteredTime.length >= 15) {
       console.log("tiden är fullbokat");
       alert("Tiden är fullbokad");
+      setTimeMessage("Sittningen är fullbokad");
+      alert("Sittningen är fullbokad");
+    }
+    else {
+      setTimeMessage("Sittningen är tillgängligt. Fyll i formulär nedan för att boka bord");
     }
   };
 
@@ -184,12 +195,14 @@ export const BookingForm = () => {
         value={searchDate}
         onChange={handleDateChange}
       />
+      {dateMessage && <p>{dateMessage}</p>}
       <h2 className='font-bold mt-4'>Välj sittning för att se om det finns lediga bord</h2>
       <select name="seeTime" value={searchTime} onChange={handleTimeChange}>
-        <option value="">Välj Sittning</option>
+                <option value="">Välj Sittning</option>
         <option value="18.00">18:00</option>
         <option value="21.00">21:00</option>
       </select>
+      {timeMessage && <p>{timeMessage}</p>}
       <h2 className='font-bold mt-4'>Fyll i formulär nedan för att boka bord</h2>
       <form action="" onSubmit={onSubmit}>
         <div>

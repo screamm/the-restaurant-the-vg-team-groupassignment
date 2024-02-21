@@ -19,7 +19,7 @@ export const Contact = () => {
       
 
       <div>
-        <img src={HappyDumplingKarta} alt="Map" className=" min-h-80 m-4 " />
+        <img src={HappyDumplingKarta} alt="Map" className=" min-h-80 m-4" />
       </div>
     </>
   );};

@@ -11,13 +11,16 @@ export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: I
     const changeBooking = async (updatedBooking: IBookingsRestaurantChangeBooking) => {
         try {
             console.log('Startar uppdatering av bokning...');
+            console.log('Uppdaterar bokning:', updatedBooking);
             const response = await axios.put(
                 `https://school-restaurant-api.azurewebsites.net/booking/update/${updatedBooking.id}`,
                 {
                     date: updatedBooking.date,
                     time: updatedBooking.time,
                     numberOfGuests: updatedBooking.numberOfGuests,
-                    id: updatedBooking.id
+                    id: updatedBooking.id,
+                    restaurantId: updatedBooking.restaurantId,
+                    customerId: updatedBooking.customerId,
                 }
             );
             console.log('Bokningen uppdaterades:', response.data);
@@ -70,7 +73,7 @@ export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: I
                         numberOfGuests: newNumberOfGuests,
                         id: booking._id,
                         restaurantId: booking.restaurantId,
-                        customerID: booking.customerID,
+                        customerId: booking.customerId,
                         customerName: booking.customerName,
                         customerLastname: booking.customerLastname,
                         _id: booking._id

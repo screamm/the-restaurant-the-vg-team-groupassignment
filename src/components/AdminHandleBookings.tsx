@@ -18,7 +18,7 @@ export const AdminHandleBookings = () => {
     try {
       const response = await axios.get(
         `https://school-restaurant-api.azurewebsites.net/booking/restaurant/65c6276ee125e85f5e15b79f`
-      );
+      ); console.log(response.data);
  
       const bookingsWithNames = await Promise.all(
         response.data.map(async (booking: ICustomer) => {
