@@ -28,6 +28,7 @@ export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: I
             setNewTime(updatedBooking.time);
             setNewNumberOfGuests(updatedBooking.numberOfGuests);
             updateBookingState(updatedBooking);
+            alert('Ändringarna har sparats!');
         } catch (error) {
             console.error('Update not possible', error);
         }
