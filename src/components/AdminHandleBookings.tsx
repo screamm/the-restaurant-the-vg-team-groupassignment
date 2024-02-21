@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { AdminSearchBooking } from "./AdminSearchBookings";
-import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
-import { ICustomer } from "../models/ICustomer";
 import { AdminChangeBooking } from "./AdminChangeBookings";
+import { IBookingRestaurant } from "../models/IBookingRestaurant";
+import { ICustomer } from "../models/ICustomer";
+import { IBookingUpdate } from '../models/IBookingUpdate';
 import { Link } from "react-router-dom";
-import { IBookingsRestaurantChangeBooking } from '../models/IChangeBooking';
+
 export const AdminHandleBookings = () => {
-  const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
-  const [filteredBookings, setFilteredBookings] = useState<IBookingsRestaurant[]>([]);
+  const [bookings, setBookings] = useState<IBookingRestaurant[]>([]);
+  const [filteredBookings, setFilteredBookings] = useState<IBookingRestaurant[]>([]);
  
   useEffect(() => {
     getAllBookings();
@@ -63,7 +64,7 @@ export const AdminHandleBookings = () => {
       console.error("Error deleting booking:", error);
     }
   };
-  const updateBookingState = (updatedBooking: IBookingsRestaurantChangeBooking) => {
+  const updateBookingState = (updatedBooking: IBookingUpdate) => {
     const updatedBookings = bookings.map(booking => {
         if (booking._id === updatedBooking.id) {
             return {

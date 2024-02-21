@@ -1,5 +1,5 @@
-export interface IBookingsRestaurantChangeBooking {
-    _id: any;
+export interface IBookingUpdate {
+    _id: string;
     id: string,
     restaurantId: string,
     date: string,

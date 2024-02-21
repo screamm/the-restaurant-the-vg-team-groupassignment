@@ -1,4 +1,5 @@
-export interface ICustomerBooking {
+export interface IBookingCreate {
+    _id: string,
     restaurantId: string,
     date: string,
     time: string,
@@ -8,5 +9,5 @@ export interface ICustomerBooking {
         lastname: string,
         email: string,
         phone: string
-    }
+}
 }

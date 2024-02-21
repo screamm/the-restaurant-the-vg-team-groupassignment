@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ChangeEvent, SyntheticEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { IBookings } from "../models/IBookings";
+import { IBookings } from "../models/IBookingCreate";
 
 export const AddBookingAdmin = () => {
     const { id } = useParams();
