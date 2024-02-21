@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChangeEvent, SyntheticEvent } from "react";
 import { Link, useParams } from "react-router-dom";
-
 import { IBookings } from "../models/IBookingCreate";
 
 export const AddBookingAdmin = () => {
@@ -191,7 +190,6 @@ export const AddBookingAdmin = () => {
                     Lägg till bokning
                 </button>
                 <br />
-                {/* <Link to={`/booking/${id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4">See new booking</Link> */}
             <Link to={`/admin`} className="btn btn-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-4">Tillbaka till admin</Link>
             </form>
         </div>
