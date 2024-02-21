@@ -4,5 +4,4 @@ export interface IRestaurant {
   zip: string,
   city: string,
   _id: string
-    
 }

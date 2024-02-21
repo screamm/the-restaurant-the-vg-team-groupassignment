@@ -1,11 +1,11 @@
 export interface IBookingsRestaurantChangeBooking {
-    _id: string;
+    _id: any;
     id: string,
     restaurantId: string,
     date: string,
     time: string,
     numberOfGuests: number,
-    customerId: string,
+    customerID: string,
     customerName: string,
     customerLastname: string,
 }

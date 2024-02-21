@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import Popup from 'reactjs-popup';
 import axios from 'axios';
-import { IBookingsRestaurantChangeBooking } from '../models/IChangeBooking';
+import { IBookingUpdate } from '../models/IBookingUpdate';
  
-export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: IBookingsRestaurantChangeBooking, updateBookingState: (booking: IBookingsRestaurantChangeBooking) => void }) => {
+export const AdminChangeBooking = ({ booking, updateBookingState }: { booking: IBookingUpdate, updateBookingState: (booking: IBookingUpdate) => void }) => {
     const [newDate, setNewDate] = useState(booking.date);
     const [newTime, setNewTime] = useState(booking.time);
     const [newNumberOfGuests, setNewNumberOfGuests] = useState(booking.numberOfGuests);
  
-    const changeBooking = async (updatedBooking: IBookingsRestaurantChangeBooking) => {
+    const changeBooking = async (updatedBooking: IBookingUpdate) => {
         try {
             console.log('Startar uppdatering av bokning...');
             console.log('Uppdaterar bokning:', updatedBooking);

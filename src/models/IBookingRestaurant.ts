@@ -1,4 +1,4 @@
-export interface IBookingsRestaurant {
+export interface IBookingRestaurant {
     _id: string,
     restaurantId: string,
     date: string,

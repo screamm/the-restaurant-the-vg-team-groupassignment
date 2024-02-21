@@ -2,15 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChangeEvent, SyntheticEvent } from "react";
 import { useParams } from "react-router-dom";
-import { IBookings } from "../models/IBookings";
-import { IBookingsRestaurant } from "../models/IBookingsRestaurant";
+import { IBookingCreate } from "../models/IBookingCreate";
+import { IBookingRestaurant } from "../models/IBookingRestaurant";
 import CircularProgress from '@mui/joy/CircularProgress';
 
 export const BookingForm = () => {
   const { id } = useParams();
-  const [restaurants, setRestaurants] = useState<IBookings[]>([]);
-  const [bookings, setBookings] = useState<IBookingsRestaurant[]>([]);
-  const [filteredBookings, setFilteredBookings] = useState<IBookingsRestaurant[]>([]);
+  const [restaurants, setRestaurants] = useState<IBookingCreate[]>([]);
+  const [bookings, setBookings] = useState<IBookingRestaurant[]>([]);
+  const [filteredBookings, setFilteredBookings] = useState<IBookingRestaurant[]>([]);
   const [searchItem, setSearchItem] = useState("");
   const [searchDate, setSearchDate] = useState("");
   const [searchTime, setSearchTime] = useState("");
@@ -37,7 +37,7 @@ export const BookingForm = () => {
 
   const getRestaurants = async () => {
     try {
-      const response = await axios.get<IBookings[]>(
+      const response = await axios.get<IBookingCreate[]>(
         `https://school-restaurant-api.azurewebsites.net/restaurant/65c6276ee125e85f5e15b79f`
       );
       setRestaurants(response.data);
